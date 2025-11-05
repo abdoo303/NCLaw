@@ -32,11 +32,11 @@ def main(cfg: DictConfig):
     torch.manual_seed(seed)
 
     wp.init()
-    wp_device = wp.get_device(f'cuda:{cfg.gpu}')
+    wp_device = wp.get_device("cpu")
     wp.ScopedTimer.enabled = False
     wp.set_module_options({'fast_math': False})
 
-    torch_device = torch.device(f'cuda:{cfg.gpu}')
+    torch_device = torch.device("cpu")
     torch.backends.cudnn.benchmark = True
 
     requires_grad = False

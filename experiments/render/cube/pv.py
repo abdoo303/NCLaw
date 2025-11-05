@@ -217,10 +217,12 @@ def render(cfg):
 @torch.no_grad()
 @hydra.main(version_base='1.2', config_path=str(root / 'configs'), config_name='pv')
 def main(cfg: DictConfig):
-
-    with Xvfb():
+    import platform
+    if platform.system() == "Darwin":  # macOS
         render(cfg)
-
+    else:
+        with Xvfb():
+            render(cfg)
 
 if __name__ == '__main__':
     main()
